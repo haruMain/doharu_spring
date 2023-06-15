@@ -4,8 +4,6 @@ public class TestVO {
 	private int num;
 	private String title;
 	private String content;
-	private String regDate;
-	private String modDate;
 	public int getNum() {
 		return num;
 	}
@@ -24,22 +22,9 @@ public class TestVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getRegDate() {
-		return regDate;
-	}
-	public void setRegDate(String regDate) {
-		this.regDate = regDate;
-	}
-	public String getModDate() {
-		return modDate;
-	}
-	public void setModDate(String modDate) {
-		this.modDate = modDate;
-	}
 	@Override
 	public String toString() {
-		return "TestVO [num=" + num + ", title=" + title + ", content=" + content + ", regDate=" + regDate
-				+ ", modDate=" + modDate + "]";
+		return "TestVO [num=" + num + ", title=" + title + ", content=" + content + "]";
 	}
 	
 	
