@@ -96,6 +96,8 @@
 </div>
 <br><br>
 
+	
+
 
 	
 	<c:forEach items="${list}" var="list">
