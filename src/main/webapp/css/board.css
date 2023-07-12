@@ -10,3 +10,5 @@ input {height: 48px; padding: 0 14px; border: 1px solid #dbdbdb; font-size: 17px
 .contents {padding: 0 0 70px; margin: 0 auto; width: 1280px; }
 
 .totalCount {width: 1280px; margin: 0 auto; padding: 0px 0px 10px 30px;}
+.page_nav {text-align: center; margin: 20px 0;}
+.page_nav a {margin: 5px; }

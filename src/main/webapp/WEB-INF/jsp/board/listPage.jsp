@@ -13,7 +13,8 @@
 <title>페이징 목록</title>
 </head>
 <body>
-<div id="nav"><%@ include file="../include/nav.jsp" %></div>
+<%-- <div id="nav"><%@ include file="../include/nav.jsp" %></div> --%>
+<div id="nav"><%@ include file="../include/header.jsp" %></div>
 <div class="contents">
 	<div class="totalCount">
 	<c:out value="총  ${count}건" ></c:out>
@@ -42,8 +43,6 @@
 		
 	</tbody>
 </table>
-</div>
-<div>
 
 <!-- 페이지네이션 -->
 <%-- <div class="pagination">
@@ -65,6 +64,7 @@
     </c:if>
 </div> --%>
 
+<div class="page_nav">
 <c:if test="${page.prev}">
  <span>[ <a href="/board/listPage?num=${page.startPageNum - 1}">이전</a> ] </span>
 </c:if>
@@ -84,6 +84,7 @@
  <span>[ <a href="/board/listPage?num=${page.endPageNum + 1}">다음</a> ] </span>
 </c:if>
 
+</div>
 </div>
 </body>
 </html>

@@ -51,6 +51,7 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
+<div id="nav"><%@ include file="../include/header.jsp" %></div>
 <div class="contents">
 <div id="nav"><%@ include file="../include/nav.jsp" %></div>
 <h1>CKEditor</h1>

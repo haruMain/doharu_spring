@@ -99,7 +99,9 @@ $(document).ready(function() {
 <!-- <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script> -->
 <body>
+<div id="nav"><%@ include file="../include/header.jsp" %></div>
 <div id="nav"><%@ include file="../include/nav.jsp" %></div>
+<div class="contents">
 <h1>CKEditor</h1>
 <%-- <c:if test="${msg != 'login_error'}"> --%>
 <form id="actionForm" name ="actionForm" method="post">
@@ -130,5 +132,6 @@ $(document).ready(function() {
 <%-- </c:if> --%>
 
 <%-- <c:if test="${msg == 'login_error'}"><p>로그인해</p></c:if> --%>
+</div>
 </body>
 </html>

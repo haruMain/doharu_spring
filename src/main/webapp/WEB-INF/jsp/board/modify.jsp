@@ -52,7 +52,9 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
+<div id="nav"><%@ include file="../include/header.jsp" %></div>
 <div id="nav"><%@ include file="../include/nav.jsp" %></div>
+<div class="contents">
 <h1>CKEditor</h1>
 <form id="actionForm" name ="actionForm" method="post">
     <div>
@@ -69,5 +71,6 @@ $(document).ready(function() {
        <button type="submit" name ="submit">완료</button>
     </div>
 </form>
+</div>
 </body>
 </html>
