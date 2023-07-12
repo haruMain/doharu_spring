@@ -9,6 +9,9 @@
     <mvc:annotation-driven />
     <!-- 추가@@ -->
     <context:component-scan base-package="com.haru"/>
+    <context:component-scan base-package="com.haru.domain"/>
+    <context:component-scan base-package="com.haru.dao"/>
+    <context:component-scan base-package="com.haru.service"/>
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		
@@ -23,10 +26,18 @@
 	 class="org.springframework.jdbc.datasource.DriverManagerDataSource"
 	 id="dataSource">
 	 <property name="driverClassName" value="org.mariadb.jdbc.Driver" />
+	 <property name="url" value="jdbc:mariadb://dev.xrp.kr:3306/gangwon" />
+	 <property name="username" value="hiper_dev" />
+	 <property name="password" value="hiper_dev" />
+	</bean>
+<!-- 	<bean
+	 class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+	 id="dataSource">
+	 <property name="driverClassName" value="org.mariadb.jdbc.Driver" />
 	 <property name="url" value="jdbc:mariadb://192.168.0.242:3306/klid" />
 	 <property name="username" value="klid" />
 	 <property name="password" value="xmlX2024!@" />
-	</bean>
+	</bean> -->
 	
 	<bean id="sqlSessionFactory"
 	 class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -39,6 +50,10 @@
 	 <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
 	</bean>	
 	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    	<property name="maxUploadSize" value="52428800" />
+		<property name="maxInMemorySize" value="10485760" />
+	</bean>
 
 	
 	<!-- <context:component-scan base-package="com.haru.domain" />

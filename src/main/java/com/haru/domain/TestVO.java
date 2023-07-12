@@ -1,31 +1,39 @@
 package com.haru.domain;
 
+import java.util.Date;
+
 public class TestVO {
-	private int num;
-	private String title;
-	private String content;
-	public int getNum() {
-		return num;
+	private String contentTitle;
+	private String contents;
+	private Date insDt;
+	
+	public String getContentTitle() {
+		return contentTitle;
 	}
-	public void setNum(int num) {
-		this.num = num;
+	public void setContentTitle(String contentTitle) {
+		this.contentTitle = contentTitle;
 	}
-	public String getTitle() {
-		return title;
+	public String getContents() {
+		return contents;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setContents(String contents) {
+		this.contents = contents;
 	}
-	public String getContent() {
-		return content;
+	public Date getInsDt() {
+		return insDt;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setInsDt(Date insDt) {
+		this.insDt = insDt;
 	}
 	@Override
 	public String toString() {
-		return "TestVO [num=" + num + ", title=" + title + ", content=" + content + "]";
+		return "TestVO [contentTitle=" + contentTitle + ", contents=" + contents + ", insDt=" + insDt + "]";
 	}
+	
+	
+
+	
+	
 	
 	
 }

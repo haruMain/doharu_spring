@@ -3,8 +3,14 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+	<settings>
+		 <setting name="mapUnderscoreToCamelCase" value="true" />
+	</settings>
+	
 	<typeAliases>
-		<typeAlias type="com.haru.domain.TestVO" alias="testVO"/>
+		<typeAlias alias="BoardVO"			type="com.haru.domain.BoardVO" />
+		<typeAlias alias="FileVO"			type="com.haru.domain.FileVO" />
+		<typeAlias alias="MemberVO"			type="com.haru.domain.MemberVO" />
 	</typeAliases>
-
+	
 </configuration>

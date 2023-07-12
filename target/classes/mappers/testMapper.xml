@@ -4,11 +4,58 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.haru.mappers.board">
 
-<select id="test" resultType="testVO">
- select
-  num, title, content
- from board
- limit 10
-</select>
+	<select id="list" resultType="BoardVO">
+		/** testDAO.list */
+	 	SELECT  SEQ, TITLE, CONTENT, DATE_FORMAT(INS_DT, '%Y-%m-%d') AS INS_DT, UPD_DT
+		FROM SYS_BOARD_TEST02
+		ORDER BY SEQ DESC
+	</select> 
+	
+	<select id="view" parameterType="int" resultType="BoardVO">
+		/** testDAO.view */
+	 	SELECT  SEQ, TITLE, CONTENT, DATE_FORMAT(INS_DT, '%Y-%m-%d') AS INS_DT, UPD_DT
+		FROM SYS_BOARD_TEST02
+		WHERE SEQ = #{seq}
+	</select> 
+	
+  	<insert id="write" parameterType="BoardVO">
+		/** testDAO.write */
+		INSERT INTO SYS_BOARD_TEST02 (
+					TITLE, CONTENT, INS_DT
+			)
+		VALUES(
+					#{title}, #{content}, sysdate()
+			)			
+	</insert>
+	
+	<update id="modify" parameterType="BoardVO">
+	 	/** testDAO.modify */
+		UPDATE SYS_BOARD_TEST02
+		SET TITLE = #{title}, 
+		CONTENT = #{content}, 
+		UPD_DT = sysdate()
+		WHERE SEQ = #{seq}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		/** testDAO.delete */
+		DELETE 
+		FROM SYS_BOARD_TEST02
+		WHERE SEQ = #{seq}	 
+	</delete>	
+	
+	<select id="count" resultType="int">
+		/** testDAO.count */
+ 		select count(SEQ) AS `count` from SYS_BOARD_TEST02
+	</select>
+	
+	<select id="listPage" resultType="BoardVO">
+		/** testDAO.listPage */
+	 	SELECT  ROW_NUMBER() OVER() AS BNO, SEQ, TITLE, CONTENT, DATE_FORMAT(INS_DT, '%Y-%m-%d') AS INS_DT, UPD_DT
+		FROM SYS_BOARD_TEST02
+		ORDER BY SEQ DESC
+		limit #{displayPost}, #{postNum}
+	</select> 
+	  
 
 </mapper>
