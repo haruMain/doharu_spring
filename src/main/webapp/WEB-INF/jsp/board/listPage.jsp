@@ -9,11 +9,31 @@
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200&display=swap" rel="stylesheet">
 	<link href="/css/board.css" rel="stylesheet" type="text/css">
 	<link rel="shortcut icon" type="image/x-icon" href="/resources/images/heart.png">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	
 <title>페이징 목록</title>
+<script>
+/* function onSelect() {
+	  // Perform an AJAX request
+	  $.ajax({
+	    url: "/board/listPage",
+	    type: "GET",
+	    dataType: "json",
+	    success: function(response) {
+	      // Handle the success response
+	      console.log(response);
+	      // Process the retrieved data as needed
+	    },
+	    error: function(xhr, status, error) {
+	      // Handle the error response
+	      console.error(error);
+	      // Handle the error case appropriately
+	    }
+	  });
+	} */
+</script>
 </head>
 <body>
-<%-- <div id="nav"><%@ include file="../include/nav.jsp" %></div> --%>
 <div id="nav"><%@ include file="../include/header.jsp" %></div>
 <div class="contents">
 	<div class="totalCount">
@@ -30,6 +50,7 @@
 		</tr>
 	</thead>
 	
+	
 	<tbody>
 	 	<c:forEach items="${list}" var="list" varStatus="status">
 		<tr>
@@ -45,6 +66,12 @@
 		
 	</tbody>
 </table>
+	<li class="wLabel"><label class="req">검색어</label></li>
+	<li class="w200"><input id="searchWord" style="width: 150px;" title="검색어" /></li>
+	<input type="text">
+	<p>
+  	 <a href="javascript:void(0);" onclick="onSelect();" >조회</a>
+	</p>
 
 <!-- 페이지네이션 -->
 <%-- <div class="pagination">

@@ -53,7 +53,6 @@ $(document).ready(function() {
 <body>
 <div id="nav"><%@ include file="../include/header.jsp" %></div>
 <div class="contents">
-<div id="nav"><%@ include file="../include/nav.jsp" %></div>
 <h1>CKEditor</h1>
 <form id="actionForm" name ="actionForm" method="post">
     <div>
@@ -63,11 +62,11 @@ $(document).ready(function() {
                 <div class="etc" title="작성일">${list.insDt}</div>
             	<div class="detail" title="내용">${list.content}</div>
             	<span>파일 목록</span>
-				<div class="form-group">
+				<%-- <div class="form-group">
 					<c:forEach var="file" items="${file}">
 						<a href="#" onclick="fn_fileDown('${file.FILE_NO}'); return false;">${file.ORG_FILE_NAME}</a>(${file.FILE_SIZE}kb)<br>
 					</c:forEach>
-				</div>
+				</div> --%>
         </dl>
     </div>
 </form>

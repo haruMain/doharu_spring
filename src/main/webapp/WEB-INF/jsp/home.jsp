@@ -17,7 +17,8 @@
 
 <P>  The time on the server is ${serverTime}. </P>
 
-<p><a href="/board/listPage">게시물 목록</a></p>
+<p><a href="/board/listPage">게시물 목록(페이징)</a></p>
+<p><a href="/board/main">게시물 목록</a></p>
 <p><a href="/board/write">글쓰기</a></p>
 
 <c:if test="${member == null }">

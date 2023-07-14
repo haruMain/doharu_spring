@@ -8,6 +8,11 @@
 		/** testDAO.list */
 	 	SELECT  SEQ, TITLE, CONTENT, DATE_FORMAT(INS_DT, '%Y-%m-%d') AS INS_DT, UPD_DT
 		FROM SYS_BOARD_TEST02
+		WHERE
+			1=1
+		<if test="searchWord != null and searchWord != ''">
+      		AND TITLE LIKE CONCAT('%', #{searchWord}, '%')
+    	</if>	
 		ORDER BY SEQ DESC
 	</select> 
 	

@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.haru.domain.BoardVO;
@@ -19,7 +20,7 @@ import com.haru.domain.Page;
 import com.haru.service.TestService;
 
 @Controller
-@RequestMapping("/board/*")
+@RequestMapping("/board")
 public class TestController {
 
 	@Autowired
@@ -27,14 +28,29 @@ public class TestController {
 
 //	게시물 목록
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	 public void getList(Model model) throws Exception {
+	 public String getList(Model model) throws Exception {
 		  List<BoardVO> list = null;
 		  list = service.list();
 		  int count = service.count();
 		  
 		  model.addAttribute("list", list);
 		  model.addAttribute("count", count);
+		  
+		  return "board/main";
 		 }
+	
+	@RequestMapping(value = "/mainList", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public String List(Model model) throws Exception {
+		List<BoardVO> list = null;
+		list = service.list();
+		int count = service.count();
+		
+		model.addAttribute("list", list);
+		model.addAttribute("count", count);
+		
+		return "board/main";
+	}
 	 
 //	 게시물작성
 	 @RequestMapping(value = "/write", method = RequestMethod.GET) 
