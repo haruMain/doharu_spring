@@ -9,6 +9,7 @@ public class BoardVO {
 	    private String content;
 	    private String insDt;
 	    private String updDt;
+	    private int hit;
 	    
 		public Long getSeq() {
 			return seq;
@@ -39,6 +40,12 @@ public class BoardVO {
 		}
 		public void setUpdDt(String updDt) {
 			this.updDt = updDt;
+		}
+		public int getHit() {
+			return hit;
+		}
+		public void setHit(int hit) {
+			this.hit = hit;
 		}
 		@Override
 		public String toString() {

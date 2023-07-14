@@ -9,7 +9,6 @@
 	
 	<typeAliases>
 		<typeAlias alias="BoardVO"			type="com.haru.domain.BoardVO" />
-		<typeAlias alias="FileVO"			type="com.haru.domain.FileVO" />
 		<typeAlias alias="MemberVO"			type="com.haru.domain.MemberVO" />
 	</typeAliases>
 	

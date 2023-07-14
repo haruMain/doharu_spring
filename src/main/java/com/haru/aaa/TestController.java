@@ -1,11 +1,9 @@
 package com.haru.aaa;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.haru.domain.BoardVO;
-import com.haru.domain.FileVO;
 import com.haru.domain.Page;
-import com.haru.service.FileService;
 import com.haru.service.TestService;
 
 @Controller
@@ -29,8 +24,6 @@ public class TestController {
 
 	@Autowired
 	TestService service;
-	@Autowired
-	FileService fileService;
 
 //	게시물 목록
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
@@ -55,8 +48,8 @@ public class TestController {
 	 }
 	 
 	 @RequestMapping(value = "/write", method = RequestMethod.POST)
-	 public String handleFormSubmission(BoardVO boardVO, HttpServletRequest request) throws Exception {
-		 service.save(boardVO);
+	 public String handleFormSubmission(BoardVO boardVO, HttpServletRequest request, MultipartHttpServletRequest mpRequest) throws Exception {
+		 service.save(boardVO, mpRequest);
 		 return "redirect:/board/main"; 
 	 }
 //	게시물작성
@@ -72,9 +65,15 @@ public class TestController {
 	 
 //	게시물 조회
 	 @RequestMapping(value = "/view", method = RequestMethod.GET)
-	 public void getView(@RequestParam("seq") int seq, Model model) throws Exception {
+	 public void getView(@RequestParam("seq") long seq, Model model) throws Exception {
 		 BoardVO boardVO = service.view(seq);
 		 model.addAttribute("list", boardVO);
+		 
+			/*
+			 * List<Map<String, Object>> fileList =
+			 * service.selectFileList(boardVO.getSeq()); model.addAttribute("file",
+			 * fileList);
+			 */
 	 }
 	 
 //	 게시물 수정
@@ -123,38 +122,5 @@ public class TestController {
 //			  model.addAttribute("list", list);
 //			 }
 	 
-	 	/**
-	   	 * 첨부파일로 등록된 파일에 대하여 업로드를 제공한다.
-	   	 */
-	   	public String commonFileUpload( MultipartHttpServletRequest multiRequest, String atchFileId, 
-	   			HttpServletRequest request, HttpServletResponse response) throws Exception {
-	   		
-	   		final Map<String, MultipartFile> files = new HashMap();
-		 	List<FileVO> fileList = null;
-		 	
-		 	// 새로
-		 	List<MultipartFile> filesList = multiRequest.getFiles("file_1");
-		 	for(int i=0;i < filesList.size() ; i++) {
-		 		String mapKey = "file_";
-		 		mapKey = mapKey + i;
-		 		files.put(mapKey, filesList.get(i));
-		 	}
-		 	
-		 	if (!files.isEmpty()) {
-		 		if ("".equals(atchFileId)) {
-		 			fileList = fileMngUtil.parseFileInf(files, "BBS_", 0, "", "");
-		 			atchFileId = fileService.insertFileInfs(fileList);
-		 			//commandMap.put("atchFileId", atchFileId);
-		 		} else {
-		 		    FileVO fvo = new FileVO();
-		 		    fvo.setAtchFileId(atchFileId);
-		 		    int cnt = fileService.getMaxFileSN(fvo);
-		 		    List<FileVO> _result = fileMngUtil.parseFileInf(files, "BBS_", cnt, atchFileId, "");
-		 		    fileService.updateFileInfs(_result);
-		 		}
-		    }
-		 	
-		 	return atchFileId;
-	   	}
 
 	}

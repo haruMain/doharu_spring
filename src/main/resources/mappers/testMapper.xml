@@ -11,7 +11,7 @@
 		ORDER BY SEQ DESC
 	</select> 
 	
-	<select id="view" parameterType="int" resultType="BoardVO">
+	<select id="view" parameterType="java.lang.Long" resultType="BoardVO">
 		/** testDAO.view */
 	 	SELECT  SEQ, TITLE, CONTENT, DATE_FORMAT(INS_DT, '%Y-%m-%d') AS INS_DT, UPD_DT
 		FROM SYS_BOARD_TEST02
@@ -20,6 +20,11 @@
 	
   	<insert id="write" parameterType="BoardVO">
 		/** testDAO.write */
+		 <selectKey keyProperty="seq" resultType="long" order="AFTER">
+	    	<!--  SELECT SEQ.NEXTVAL FROM DUAL  -->
+	    	   SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'SYS_BOARD_TEST02'
+	    	   <!-- SELECT LAST_INSERT_ID() AS seq  -->
+	    </selectKey>
 		INSERT INTO SYS_BOARD_TEST02 (
 					TITLE, CONTENT, INS_DT
 			)
@@ -27,6 +32,25 @@
 					#{title}, #{content}, sysdate()
 			)			
 	</insert>
+	
+	<!-- 첨부파일 -->
+	<insert id="insertFile" parameterType="hashMap">
+		INSERT INTO FILE(
+			FILE_NO,
+			SEQ,
+			ORG_FILE_NAME,
+			STORED_FILE_NAME,
+			FILE_SIZE
+		)VALUES(
+		 <!-- (SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'FILE'), -->
+			<!-- SEQ_MP_FILE_NO.NEXTVAL, -->
+			#{FILE_NO},
+			#{SEQ},
+			#{ORG_FILE_NAME},
+			#{STORED_FILE_NAME},
+			#{FILE_SIZE}
+		)
+    </insert>
 	
 	<update id="modify" parameterType="BoardVO">
 	 	/** testDAO.modify */
@@ -51,11 +75,27 @@
 	
 	<select id="listPage" resultType="BoardVO">
 		/** testDAO.listPage */
-	 	SELECT  ROW_NUMBER() OVER() AS BNO, SEQ, TITLE, CONTENT, DATE_FORMAT(INS_DT, '%Y-%m-%d') AS INS_DT, UPD_DT
+	 	SELECT  ROW_NUMBER() OVER() AS BNO, SEQ, TITLE, CONTENT, DATE_FORMAT(INS_DT, '%Y-%m-%d') AS INS_DT, UPD_DT, HIT
 		FROM SYS_BOARD_TEST02
 		ORDER BY SEQ DESC
 		limit #{displayPost}, #{postNum}
 	</select> 
+	<!-- 게시판 조회수 -->
+	 <update id="boardHit" parameterType="java.lang.Long">
+    	UPDATE SYS_BOARD_TEST02 SET
+    	HIT = HIT+1
+    	WHERE SEQ = #{seq}
+    </update>
+	
+	<!-- 첨부파일 조회 -->
+	<select id="selectFileList" parameterType="long" resultType="hashMap">
+		SELECT FILE_NO,
+			   ORG_FILE_NAME,
+			   ROUND(FILE_SIZE/1024,1) AS FILE_SIZE
+		  FROM MP_FILE
+		 WHERE SEQ = #{seq}
+		   AND DEL_GB = 'N'
+	</select>
 	  
 
 </mapper>

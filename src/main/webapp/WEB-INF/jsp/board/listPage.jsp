@@ -26,6 +26,7 @@
 			<th>번호</th>
 			<th>제목</th>
   			<th>날짜</th>
+  			<th>조회수</th>
 		</tr>
 	</thead>
 	
@@ -38,6 +39,7 @@
 				<a href="/board/view?seq=${list.seq}">${list.title}</a>  				
   			</td>	
   			<td>${list.insDt}</td>	
+  			<td>${list.hit}</td>	
   		</tr>
 		</c:forEach> 
 		

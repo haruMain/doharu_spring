@@ -104,7 +104,7 @@ $(document).ready(function() {
 <div class="contents">
 <h1>CKEditor</h1>
 <%-- <c:if test="${msg != 'login_error'}"> --%>
-<form id="actionForm" name ="actionForm" method="post">
+<form id="actionForm" name ="actionForm" action="/board/write" method="post" enctype="multipart/form-data">
     <div>
         <dl>
             <dt>제목</dt>
@@ -113,7 +113,7 @@ $(document).ready(function() {
             </dd>
             <dt>첨부파일</dt>
             <dd>
-            	<input type="file" title="파일첨부" multiple>
+            	<input type="file" name="file" title="파일첨부" multiple>
             	<div id="comFileList" title="첨부한 파일" style="display:inline;"></div>
             </dd>
             <dt>내용</dt>

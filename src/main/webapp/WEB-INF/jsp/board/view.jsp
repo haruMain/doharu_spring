@@ -62,6 +62,12 @@ $(document).ready(function() {
                 <div class="subject" title="제목">${list.title}</div>
                 <div class="etc" title="작성일">${list.insDt}</div>
             	<div class="detail" title="내용">${list.content}</div>
+            	<span>파일 목록</span>
+				<div class="form-group">
+					<c:forEach var="file" items="${file}">
+						<a href="#" onclick="fn_fileDown('${file.FILE_NO}'); return false;">${file.ORG_FILE_NAME}</a>(${file.FILE_SIZE}kb)<br>
+					</c:forEach>
+				</div>
         </dl>
     </div>
 </form>

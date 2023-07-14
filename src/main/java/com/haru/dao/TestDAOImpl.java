@@ -2,6 +2,7 @@ package com.haru.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class TestDAOImpl implements TestDAO {
 
 //	게시물 조회
 	@Override
-	public BoardVO view(int seq) throws Exception {
+	public BoardVO view(long seq) throws Exception {
 		 return sql.selectOne(namespace + ".view", seq);
 	}
 
@@ -62,5 +63,25 @@ public class TestDAOImpl implements TestDAO {
 		 data.put("postNum", postNum);
 		 return sql.selectList(namespace + ".listPage", data);
 	}
+	
+// 	첨부파일 업로드
+	@Override
+	public void insertFile(Map<String, Object> map) throws Exception {
+			/* sql.insert("boardMapper.insertFile", map); */
+		sql.insert(namespace + ".insertFile", map);
+	}
+	
+// 첨부파일 조회
+	@Override
+	public List<Map<String, Object>> selectFileList(long seq) throws Exception {
+		return sql.selectOne(namespace + ".selectFileList", seq);
+	}
+	
+//	게시판 조회수
+	@Override
+	public void boardHit(long seq) throws Exception {
+		sql.update(namespace + ".boardHit", seq);
+	}
+	
 
 }
